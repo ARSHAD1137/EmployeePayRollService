@@ -32,13 +32,13 @@ namespace EmployeePayRollService1
                             employeeModel.BasicPay = dr.GetDecimal(2);
                             employeeModel.StartDate = dr.GetDateTime(3);
                             employeeModel.Gender = Convert.ToChar(dr.GetString(4));
-                            //employeeModel.PhoneNumber = dr.GetString(5);
-                            //employeeModel.Address = dr.GetString(6);
-                            //employeeModel.Department = dr.GetString(7);
-                            //employeeModel.Deductions = dr.GetDouble(8);
-                            //employeeModel.TaxablePay = dr.GetDouble(8);
-                            //employeeModel.Tax = dr.GetDouble(9);
-                            //employeeModel.NetPay = dr.GetDouble(10);
+                            employeeModel.PhoneNumber = dr.GetString(5);
+                            employeeModel.Address = dr.GetString(6);
+                            employeeModel.Department = dr.GetString(7);
+                            employeeModel.Deductions = dr.GetDouble(8);
+                            employeeModel.TaxablePay = dr.GetDouble(8);
+                            employeeModel.Tax = dr.GetDouble(9);
+                            employeeModel.NetPay = dr.GetDouble(10);
                             System.Console.WriteLine(employeeModel.EmployeeName + " " + employeeModel.BasicPay + " " + employeeModel.StartDate + " " + employeeModel.Gender + " " + employeeModel.PhoneNumber + " " + employeeModel.Address + " " + employeeModel.Department + " " + employeeModel.Deductions + " " + employeeModel.TaxablePay + " " + employeeModel.Tax + " " + employeeModel.NetPay);
                             System.Console.WriteLine("\n");
                         }
@@ -98,7 +98,38 @@ namespace EmployeePayRollService1
             }
             return false;
         }
+        public bool UpdateEmployeeDetails(EmployeeModel model)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand update = new SqlCommand("SpUpdateEmployeeDetails", this.connection);
+                    update.CommandType = System.Data.CommandType.StoredProcedure;
+                    update.Parameters.AddWithValue("@id", model.EmployeeID);
+                    update.Parameters.AddWithValue("@Basic_Pay", model.BasicPay);
+                    this.connection.Open();
+                    var result = update.ExecuteNonQuery();
+                    this.connection.Close();
+                    if (result != 0)
+                    {
 
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+            return false;
+        }
     }
 
 
