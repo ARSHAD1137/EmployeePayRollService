@@ -130,6 +130,38 @@ namespace EmployeePayRollService1
             }
             return false;
         }
+        public bool GetReterieveData()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                EmployeeModel employeeModel_1 = new EmployeeModel();
+                using (this.connection)
+                {
+                    string query = @"Select * from employee_payroll where start between 2017-08-14 and GETDATE()";
+                    SqlCommand cmd = new SqlCommand(query, this.connection);
+                    this.connection.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            employeeModel_1.EmployeeID = dr.GetInt32(0);
+                            employeeModel_1.EmployeeName = dr.GetString(1);
+                            employeeModel_1.StartDate = dr.GetDateTime(2);
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("No data found");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+        }
     }
 
 

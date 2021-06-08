@@ -25,14 +25,16 @@ namespace EmployeePayRollService1
            employee.StartDate = Convert.ToDateTime("2020-11-03");
 
            if (repo.AddEmployee(employee))
-           Console.WriteLine("Records added successfully");*/
+           Console.WriteLine("Records added successfully");
 
             employee.EmployeeID =2;
             employee.BasicPay = 3000000;
             if (repo.UpdateEmployeeDetails(employee))
-            Console.WriteLine("Records update successfully");
-
+            Console.WriteLine("Records update successfully");*/
             //repo.GetAllEmployee();
+
+            repo.GetReterieveData();
+ 
             Console.ReadKey();
         }
     }
