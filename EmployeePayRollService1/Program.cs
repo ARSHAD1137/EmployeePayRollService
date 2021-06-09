@@ -33,8 +33,8 @@ namespace EmployeePayRollService1
             Console.WriteLine("Records update successfully");*/
             //repo.GetAllEmployee();
 
-            repo.GetReterieveData();
- 
+            //repo.ReterieveData();
+            repo.Funcations();
             Console.ReadKey();
         }
     }

@@ -130,7 +130,7 @@ namespace EmployeePayRollService1
             }
             return false;
         }
-        public bool GetReterieveData()
+        public bool ReterieveData()
         {
             SqlConnection connection = new SqlConnection(connectionString);
             try
@@ -162,7 +162,108 @@ namespace EmployeePayRollService1
                 System.Console.WriteLine(e.Message);
             }
         }
+        public void Funcations()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                EmployeeModel employeeModel_2 = new EmployeeModel();
+                using (this.connection)
+                {
+                    string sum = @"Select sum(Basic_pay) from employee_payroll where gender='M' GROUP BY gender";
+                    string avg = @"Select avg(Basic_pay) from employee_payroll where gender='M' GROUP BY gender";
+                    string max = @"Select max(Basic_pay) from employee_payroll where gender='F' GROUP BY gender";
+                    string min = @"Select min(Basic_pay) from employee_payroll where gender='M' GROUP BY gender";
+                    string count = @"Select count(Basic_pay) from employee_payroll where gender='F' GROUP BY gender";
+                    //sum
+                    SqlCommand Sumcmd = new SqlCommand(sum, this.connection);
+                    this.connection.Open();
+                    SqlDataReader sumdr = Sumcmd.ExecuteReader();
+                    if (sumdr.HasRows)
+                    {
+                        while (sumdr.Read())
+                        {
+                            decimal Add = sumdr.GetDecimal(0);
+                            Console.WriteLine("Salary Total = {0}", Add);
+                        }
+                    }
+                    {
+                        System.Console.WriteLine("No data found");
+                    }
+                    this.connection.Close();
+                    //avg
+                    SqlCommand avgcmd = new SqlCommand(avg, this.connection);
+                    this.connection.Open();
+                    SqlDataReader avgdr = avgcmd.ExecuteReader();
+                    if (avgdr.HasRows)
+                    {
+                        while (avgdr.Read())
+                        {
+                            decimal Avg = avgdr.GetDecimal(0);
+                            Console.WriteLine("Salary Total = {0}", Avg);
+                        }
+                    }
+                    {
+                        System.Console.WriteLine("No data found");
+                    }
+                    this.connection.Close();
+                    //Max
+                    SqlCommand maxcmd = new SqlCommand(max, this.connection);
+                    this.connection.Open();
+                    SqlDataReader maxdr = maxcmd.ExecuteReader();
+                    if (maxdr.HasRows)
+                    {
+                        while (maxdr.Read())
+                        {
+                            decimal Max = maxdr.GetDecimal(0);
+                            Console.WriteLine("Salary Total = {0}", Max);
+                        }
+                    }
+                    {
+                        System.Console.WriteLine("No data found");
+                    }
+                    this.connection.Close();
+                    //Min
+                    SqlCommand mincmd = new SqlCommand(min, this.connection);
+                    this.connection.Open();
+                    SqlDataReader mindr = mincmd.ExecuteReader();
+                    if (mindr.HasRows)
+                    {
+                        while (mindr.Read())
+                        {
+                            decimal Min = mindr.GetDecimal(0);
+                            Console.WriteLine("Salary Total = {0}", Min);
+                        }
+                    }
+                    {
+                        System.Console.WriteLine("No data found");
+                    }
+                    this.connection.Close();
+                    //Count
+                    SqlCommand countcmd = new SqlCommand(sum, this.connection);
+                    this.connection.Open();
+                    SqlDataReader countdr = countcmd.ExecuteReader();
+                    if (countdr.HasRows)
+                    {
+                        while (countdr.Read())
+                        {
+                            decimal Count = countdr.GetDecimal(0);
+                            Console.WriteLine("Salary Total = {0}", Count);
+                        }
+                    }
+                    {
+                        System.Console.WriteLine("No data found");
+                    }
+                    this.connection.Close();
+
+                }
+                
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+            
+        }
     }
-
-
 }

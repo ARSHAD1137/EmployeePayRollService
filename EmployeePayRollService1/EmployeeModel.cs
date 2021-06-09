@@ -21,9 +21,5 @@ namespace EmployeePayRollService1
         public double NetPay { get; set; }
         public DateTime StartDate { get; set; }
 
-
-
     }
-
-
 }
